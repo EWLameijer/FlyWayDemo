@@ -1,0 +1,59 @@
+https://documentation.red-gate.com/fd/getting-started-with-flyway-184127223.html
+
+Will create flyway_schema_history table 
+
+Community edition is at bottom of https://www.red-gate.com/products/flyway/community/
+
+https://www.red-gate.com/products/flyway/community/download/  [1/4]
+
+Program Files/RedGate
+
+Need to copy flyway folder into other directory, as Program Files hampers editing configuration
+
+conf/flyway.toml (get rid of 'example')
+
+// needed all those lines, as flyway.user is not recognized
+// DOES NOT WORK FROM ZED shell, but does from command line
+
+[flyway]
+environment = "sample"
+locations = ["filesystem:C:/development/languages-and-frameworks/java/FlyWayDemo/migrations/"]
+
+[environments.sample]
+url = "jdbc:postgresql://localhost:5432/flyway_demo"
+user = "postgres"
+password = "postgres"
+
+
+/
+spring.jpa.hibernate.ddl-auto=validate is handy! (https://blog.stackademic.com/how-to-set-up-a-spring-boot-application-with-flyway-the-right-way-af5dfc6b903b)
+
+V<version>__<description>.sql
+
+Never change flyway files
+
+* Check book + check how to change environment variables
+
+Normaal src/main/resources/db/migration
+
+U=undo
+R=repeatable (add stored procedures; these scripts can be changed)
+
+Using
+C:\development\programming_tools\flyway>flyway migrate
+
+and
+
+[flyway]
+environment = "sample"
+locations = ["filesystem:C:/development/languages-and-frameworks/java/FlyWayDemo"]
+
+[environments.sample]
+url = "jdbc:postgresql://localhost:5432/flyway_demo"
+user = "postgres"
+password = "postgres"
+
+
+// By default, the configuration will be read from conf/flyway.toml file. => so make conf/flyway.toml in your Java project? And add flyway to the path?
+
+
